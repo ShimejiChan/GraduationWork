@@ -1,0 +1,77 @@
+/*カメラ映像表示部分の設定*/
+#container > video,
+#container > canvas {
+  width: 100%;
+}
+#container > canvas {
+  position: absolute;
+  left: 0px;
+  top: 0px;
+}
+
+#canvas {
+  width: 100%;
+  height: auto;
+}
+/*ここまでカメラ*/
+
+#bookThumbnail {
+  width: 186px;
+  margin: 0% 5%;
+}
+
+#alertArea {
+  margin-top: 5%;
+}
+
+#bookshelf {
+  margin: 2em;
+  background-color: white;
+  border-radius: 2em;
+}
+
+.btn.main {
+  background-color: #00adb5;
+  color: #eeeeee;
+}
+
+.btn.main:hover {
+  background-color: #00777e;
+  color: #eeeeee;
+}
+
+.btn.sub {
+  background-color: #eeeeee;
+  color: #393e46;
+}
+
+.btn.sub:hover {
+  background-color: #d1d1d1;
+  color: #393e46;
+}
+
+.btn.outline {
+  background-color: #ffffff;
+  color: #00adb5;
+  border: thin solid #00adb5;
+}
+
+.btn.outline:hover {
+  background-color: #00adb5;
+  color: #ffffff;
+}
+
+#navbar {
+  background-color: #222831;
+}
+
+body {
+  min-height: 100vh;
+  background-color: #eeeeee;
+}
+
+.sticky-bottom {
+  position: sticky;
+  top: 100vh;
+  z-index: 1020;
+}
