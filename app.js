@@ -15,36 +15,43 @@ function RunByOnload() {
 function GetData() {
   url = "https://www.googleapis.com/books/v1/volumes?q=isbn:"; //GOOGLE API
   isbn = document.getElementById("ISBN").value;
+  sendUrl = url + isbn;
 
   if (document.getElementById("ISBN").value == "") {
     MakeAlert("ISBNを入力してください");
     return;
   }
 
-  let request = new XMLHttpRequest();
-  request.open("GET", url + isbn);
-  request.responseType = "json";
-  request.send();
-  request.onload = function () {
-    const result = request.response;
-    if (result["totalItems"] === 0) {
-      MakeAlert("書籍情報が取得できませんでした。");
-      document.getElementById("ISBN").value = "";
-    } else if (result["items"][0]["volumeInfo"]["imageLinks"] == null) {
-      MakeAlert("画像が見つかりませんでした");
-    } else {
-      document.getElementById("imagePlace").src =
-        result["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"];
-      document.getElementById("imageSrc").value =
-        result["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"];
-    }
-    document.getElementById("title").value =
-      result["items"][0]["volumeInfo"]["title"];
-    document.getElementById("authors").value =
-      result["items"][0]["volumeInfo"]["authors"];
-    document.getElementById("detailLink").value =
-      result["items"][0]["volumeInfo"]["infoLink"];
-  };
+  fetch(sendUrl)
+    .then((response) => {
+      return response.json(); //ここでBodyからJSONを返す
+    })
+    .then((result) => {
+      SetBookData(result); //取得したJSONデータを関数に渡す
+    })
+    .catch((e) => {
+      MakeAlert("エラーが発生しました " + e);
+    });
+}
+
+function SetBookData(result) {
+  if (result["totalItems"] === 0) {
+    MakeAlert("書籍情報が取得できませんでした。");
+    document.getElementById("ISBN").value = "";
+  } else if (result["items"][0]["volumeInfo"]["imageLinks"] == null) {
+    MakeAlert("画像が見つかりませんでした");
+  } else {
+    document.getElementById("imagePlace").src =
+      result["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"];
+    document.getElementById("imageSrc").value =
+      result["items"][0]["volumeInfo"]["imageLinks"]["thumbnail"];
+  }
+  document.getElementById("title").value =
+    result["items"][0]["volumeInfo"]["title"];
+  document.getElementById("authors").value =
+    result["items"][0]["volumeInfo"]["authors"];
+  document.getElementById("detailLink").value =
+    result["items"][0]["volumeInfo"]["infoLink"];
 }
 
 //データ保存
