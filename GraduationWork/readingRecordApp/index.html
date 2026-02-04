@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>読書記録アプリ</title>
+    <link rel="icon" href="images/book.svg" type="image/svg+xml" />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!--モーダルの登録フォーム -->
+    <div class="modal fade" id="inputModal" tabindex="-1" labelledby="inputModalLabel">
+        <div class="modal-dialog modal-dialog-scrollable modal-lg">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="inputeModalLabel">本を登録する</h1>
+                    <button type="button" class="btn-close" id="closeModalButton" data-bs-dismiss="modal"
+                        label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="container">
+                        <div id="quagga__livestream"></div> <!--quaggaJSのカメラがここに表示される-->
+                        <class="row">
+                            <label class="col-form-label" for="inputDefault">ISBN</label>
+                            <input type="text" name="isbn" id="ISBN" class="form-control col-8"><br>
+                            <button id="quagga__cameraOn" class="btn sub"><i class="bi bi-camera"></i>
+                                バーコードを読み取る</button>
+                            <button onclick="GetData();" class="btn main" id="getDataButton">データ取得</button><br>
+                            <div id="alertArea"></div>
+                            <img src="" id="imagePlace"><br>
+                            <label class="col-form-label" for="inputDefault">画像URL</label>
+                            <input type="text" name="imageSrc" id="imageSrc" class="form-control"><br>
+                            <label class="col-form-label" for="inputDefault">タイトル</label>
+                            <input type="text" name="title" id="title" class="form-control" placeholder=" "><br>
+                            <label class="col-form-label" for="inputDefault">著者</label>
+                            <input type="text" name="authors" id="authors" class="form-control" placeholder=" "><br>
+                            <label class="col-form-label" for="inputDefault">詳細URL</label>
+                            <input type="text" name="detail" id="detailLink" class="form-control"><br>
+                            <div class="mb-3">
+                                <label for="memo" class="form-label">感想・メモ</label>
+                                <textarea class="form-control" id="memo" rows="3"></textarea>
+                            </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button onclick="SaveData();" id="submitButton" class="btn main">保存</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--ナビバー-->
+    <nav class="navbar navbar-expand-lg  sticky-top" data-bs-theme="dark" id="navbar">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#"><i class="bi bi-book"></i> 読書記録アプリ</a>
+            <form class="justify-content-end">
+                <button type="button" class="btn main" data-bs-toggle="modal" data-bs-target="#inputModal"
+                    id="openModalButton">
+                    登録
+                </button>
+                <button onclick="Clear();" class="btn sub" id="clearButton">データ削除</button>
+            </form>
+        </div>
+    </nav>
+
+    <!--本が登録されていない場合に表示-->
+    <div id="pageTop"></div>
+
+
+    <!--本の表示エリア-->
+    <div class="container">
+        <div id="bookshelf" class="row row-cols-1 row-cols-sm-2 g-3">
+        </div>
+    </div>
+
+    <!--最上部に戻るボタン-->
+    <a class="btn main position-fixed bottom-0 end-0 me-5 mb-5" href="#pageTop"><i class="bi bi-chevron-up"></i></a>
+
+    <!--フッター-->
+    <!-- <footer class="container-fluid text-center sticky-bottom">
+        <div class="row">
+            <div class="col">
+                <p class="small text-muted">Bootstrap Icons by @mdo under MIT License</p>
+            </div>
+        </div>
+    </footer> -->
+
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz"
+        crossorigin="anonymous"></script>
+    <script src="https://unpkg.com/@ericblade/quagga2@1.7.4/dist/quagga.min.js"></script>
+    <script src="app.js"></script>
+</body>
+
+</html>
