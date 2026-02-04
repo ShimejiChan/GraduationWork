@@ -16,7 +16,7 @@
 /*ここまでカメラ*/
 
 #bookThumbnail {
-  width: 186px;
+  max-width: 30vw;
   margin: 0% 5%;
 }
 
